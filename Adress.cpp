@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Adress.h"
 
+Adress::Adress() = default;
+
 Adress::Adress(std::string country, std::string city, std::string street) {
     this->country = std::move(country);
     this->city = std::move(city);
@@ -39,7 +41,7 @@ std::ostream & operator<<(std::ostream & ostream, const Adress& adress) {
 }
 
 std::istream &operator>>(std::istream & istream, Adress & adress) {
-    std::cout << "please complete the address\n";
+//    std::cout << "please complete the address\n";
     std::cout << "Enter the country:";
     istream >> adress.country;
     std::cout << "Enter the city:";

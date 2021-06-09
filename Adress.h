@@ -4,6 +4,7 @@
 #include <iostream>
 class Adress {
 public:
+    Adress();
     Adress(std::string , std::string , std::string );
 
 private:
