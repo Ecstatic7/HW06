@@ -1,11 +1,20 @@
 
 #include "Person.h"
+#include <cstring>
+#include <regex>
 
 Person::Person() = default;
 
-Person::Person(std::string name, std::string id, const Adress &adress) :
-        name(std::move(name)), id(std::move(id)), adress(adress) {}
-
+Person::Person(std::string name, std::string id, const Adress &adress){
+    if (validate(id)){
+        this->name = name;
+        this->id = id;
+        this->adress = adress;
+    } else{
+        std::cout << "invalid ID!";
+        exit(1);
+    }
+}
 Person::Person(const Person &person) {
     this->name = person.name;
     this->adress = person.adress;
@@ -62,9 +71,29 @@ Person &Person::operator=(const Person & person) {
     return *this;
 }
 
+bool Person::validate(std::string id) {
+    if (id.length() < 8 || id.length() > 10)
+        return false;
+    if (std::stoi(id.substr(0, 2)) < 84 || std::stoi(id.substr(0, 2)) > 99)
+        return false;
+
+    int numberOfChars = (int) id.length() - 7;
+
+    for (int i = 2; i < 2 + numberOfChars; ++i) {
+        if ((47 < (int) id.at(i) && (int) id.at(i) < 58))
+            return false;
+    }
 
 
+    for (int i = 2 + numberOfChars; i < id.length(); ++i) {
+        if (!(47 < (int) id.at(i) && (int) id.at(i) < 58))
+            return false;
+        if ((int) ((id.at(i) - '0') >= 4 && (int) (id.at(i) - '0') <= 6) || (int) (id.at(i) - '0') < 0)
+            return false;
+    }
 
+    return true;
+}
 
 
 
