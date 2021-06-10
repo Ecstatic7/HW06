@@ -2,10 +2,12 @@
 #define HW06_ADRESS_H
 
 #include <iostream>
+
 class Adress {
 public:
     Adress();
-    Adress(std::string , std::string , std::string );
+
+    Adress(std::string, std::string, std::string);
 
 private:
     std::string country;
@@ -25,8 +27,9 @@ public:
 
     const std::string &getStreet() const;
 
-    friend std::ostream & operator<<(std::ostream & , const Adress&);
-    friend std::istream & operator>>(std::istream & , Adress&);
+    friend std::ostream &operator<<(std::ostream &, const Adress &);
+
+    friend std::istream &operator>>(std::istream &, Adress &);
 
 };
 

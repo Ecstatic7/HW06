@@ -33,15 +33,14 @@ const std::string &Adress::getStreet() const {
     return street;
 }
 
-std::ostream & operator<<(std::ostream & ostream, const Adress& adress) {
+std::ostream &operator<<(std::ostream &ostream, const Adress &adress) {
     ostream << "The address is in the country of " << adress.getCountry();
     ostream << " in " << adress.getCity() << " city";
     ostream << " and the " << adress.getStreet() << " street\n";
     return ostream;
 }
 
-std::istream &operator>>(std::istream & istream, Adress & adress) {
-//    std::cout << "please complete the address\n";
+std::istream &operator>>(std::istream &istream, Adress &adress) {
     std::cout << "Enter the country:";
     istream >> adress.country;
     std::cout << "Enter the city:";

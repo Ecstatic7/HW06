@@ -31,9 +31,11 @@ public:
 
     static bool validate(std::string);
 
-    friend std::ostream & operator<<(std::ostream & , const Person &);
-    friend std::istream & operator>>(std::istream & , Person &);
-    Person & operator=(const Person & );
+    friend std::ostream &operator<<(std::ostream &, const Person &);
+
+    friend std::istream &operator>>(std::istream &, Person &);
+
+    Person &operator=(const Person &);
 };
 
 
