@@ -46,8 +46,8 @@ Adress Person::getAdress() const {
 }
 
 std::ostream &operator<<(std::ostream &output, const Person &person) {
-    output << "My name is " << person.getName() << " with the ID of " << person.getId();
-    output << " and " << person.getAdress();
+    output << "My name is " << person.getName() << " with the ID of " << person.getId()
+    <<" and " << person.getAdress();
     return output;
 }
 
@@ -56,7 +56,12 @@ std::istream &operator>>(std::istream &istream, Person &person) {
     istream >> person.name;
     std::cout << "Enter the ID:";
     istream >> person.id;
-    std::cout << "Enter the Address";
+
+    if (!person.validate(person.id)){
+        std::cout << "invalid id";
+        exit(1);
+    }
+
     istream >> person.adress;
     return istream;
 }

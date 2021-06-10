@@ -5,7 +5,7 @@
 #include <Adress.h>
 
 class Person {
-private:
+protected:
     std::string name;
     std::string id;
     Adress adress;
@@ -29,7 +29,7 @@ public:
 
     Adress getAdress() const;
 
-    static bool validate(std::string);
+    virtual bool validate(std::string);
 
     friend std::ostream &operator<<(std::ostream &, const Person &);
 
