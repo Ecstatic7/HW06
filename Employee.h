@@ -40,6 +40,10 @@ public:
     Employee & operator=(const Employee &);
 
      bool validate(std::string) override;
+
+     double calculateSalary() const;
+
+     double efficiency() const;
 };
 
 

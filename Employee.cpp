@@ -1,9 +1,9 @@
-
+#include <iomanip>
 #include "Employee.h"
 
 Employee::Employee(const std::string &name, const std::string &id, const Adress &adress, int hourWork,
                    int salaryPerHour, int workToDo, int workDone): Person(name, id, adress){
-    if (Employee::validate(id)){
+    if (validate(id)){
         this->hourWork = hourWork;
         this->salaryPerHour = salaryPerHour;
         this->workDone = workDone;
@@ -97,6 +97,19 @@ bool Employee::validate(std::string id) {
         return false;
 
     return true;
+}
+
+double Employee::calculateSalary() const {
+    double percentage =(double )workDone/workToDo;
+    double salary = hourWork * salaryPerHour;
+
+    return salary * percentage;
+}
+
+double Employee::efficiency() const {
+    double percentage =(double )workDone/workToDo * 100;
+
+    return percentage/hourWork;
 }
 
 
