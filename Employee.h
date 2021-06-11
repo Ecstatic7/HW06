@@ -41,7 +41,7 @@ public:
 
      bool validate(std::string) override;
 
-     double calculateSalary() const;
+     virtual double calculateSalary() const;
 
      double efficiency() const;
 };

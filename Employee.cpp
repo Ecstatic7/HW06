@@ -56,10 +56,10 @@ int Employee::getWorkDone() const {
 
 std::ostream &operator<<(std::ostream & ostream, Employee & employee) {
     ostream << static_cast<Person&> (employee);
-    ostream << "and my hour Work:" << employee.getHourWork();
-    ostream << "  salary per hour:" << employee.getSalaryPerHour() << '$';
-    ostream << "  Works to do:" << employee.getWorkToDo();
-    ostream << "  Works that i have done:" << employee.getWorkDone();
+    ostream << " and my hour Work:" << employee.getHourWork()
+    << " salary per hour:" << employee.getSalaryPerHour() << '$'
+    << "  Works to do:" << employee.getWorkToDo()
+    << "  Works that i have done:" << employee.getWorkDone();
     return ostream;
 }
 
@@ -111,5 +111,3 @@ double Employee::efficiency() const {
 
     return percentage/hourWork;
 }
-
-

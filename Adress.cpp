@@ -36,7 +36,7 @@ const std::string &Adress::getStreet() const {
 std::ostream &operator<<(std::ostream &ostream, const Adress &adress) {
     ostream << "The address is in the country of " << adress.getCountry();
     ostream << " in " << adress.getCity() << " city";
-    ostream << " and the " << adress.getStreet() << " street\n";
+    ostream << " and the " << adress.getStreet() << " street";
     return ostream;
 }
 

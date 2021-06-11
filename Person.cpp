@@ -1,6 +1,5 @@
 
 #include "Person.h"
-#include <regex>
 
 Person::Person() = default;
 
@@ -89,7 +88,7 @@ bool Person::validate(std::string id) {
             return false;
     }
 
-    for (int i = 2 + numberOfChars; i < id.length(); ++i) {    /// checking the last five characters are a valid number
+    for (int i = 2 + numberOfChars; i < id.length(); ++i) {    /// checking the last five characters are number
         if (!(47 < (int) id.at(i) && (int) id.at(i) < 58))
             return false;                                      /// if they're not number return false
 
@@ -99,6 +98,3 @@ bool Person::validate(std::string id) {
 
     return true;                                               /// it's valid
 }
-
-
-
