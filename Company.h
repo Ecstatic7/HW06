@@ -19,7 +19,7 @@ public:
 
     Company(const Company &);
 
-    ~Company();
+     ~Company();
 
     void setBudget(int budget);
 

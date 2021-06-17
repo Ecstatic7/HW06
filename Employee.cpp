@@ -65,18 +65,23 @@ std::ostream &operator<<(std::ostream & ostream, Employee & employee) {
 
 std::istream &operator>>(std::istream & istream, Employee & employee) {
     istream >> static_cast<Person &>(employee);
-    std::cout << "Enter your hour work:";
-    istream >> employee.hourWork;
-    std::cout << "Enter your salary per hour:";
-    istream >> employee.salaryPerHour;
-    std::cout << "Enter number of works to do:";
-    istream >> employee.workToDo;
-    std::cout << "Enter number of works you done:";
-    istream >> employee.workDone;
+    if (employee.validate(employee.getId())) {
+        std::cout << "Enter your hour work:";
+        istream >> employee.hourWork;
+        std::cout << "Enter your salary per hour:";
+        istream >> employee.salaryPerHour;
+        std::cout << "Enter number of works to do:";
+        istream >> employee.workToDo;
+        std::cout << "Enter number of works you done:";
+        istream >> employee.workDone;
+    } else{
+        std::cout << "invalid id";
+        exit(1);
+    }
     return istream;
 }
 
-Employee::Employee() {}
+Employee::Employee() = default;
 
 Employee &Employee::operator=(const Employee & employee) {
     if (this != &employee) {

@@ -20,7 +20,6 @@ Company::~Company() {
 
 Company::Company(const Company &company) {
 
-    this->Company::~Company();
 
     this->budget = company.budget;
 
@@ -118,15 +117,10 @@ void Company::checkBossEfficiency() {
         int n = boss->getNumberOfEmployees();
         for (int i = 0; i < n; ++i) {
             if (employees[i] == bestEmployee) {
-                *employees[i] = *dynamic_cast<Employee *>(boss);
-                boss = dynamic_cast<Boss *>(bestEmployee);
-                delete employees[i];
-                employees[i] = new Boss;
-                *employees[i] = *dynamic_cast<Boss *>(boss);
-                delete boss;
-                Employee * newBoss = new Boss;
-                *newBoss = *bestEmployee;
-                boss = dynamic_cast<Boss *>(newBoss);
+
+                employees[i] = static_cast<Employee *>(boss);       /// ?
+
+                boss = static_cast<Boss *>(bestEmployee);
                 boss->setNumberOfEmployees(n);
             }
         }

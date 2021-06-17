@@ -29,7 +29,7 @@ public:
 
     Adress getAdress() const;
 
-    virtual bool validate(std::string);
+    bool validate(std::string);
 
     friend std::ostream &operator<<(std::ostream &, const Person &);
 

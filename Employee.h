@@ -6,10 +6,10 @@
 
 class Employee : public Person {
 private:
-    int hourWork;
-    int salaryPerHour;
-    int workToDo;
-    int workDone;
+    int hourWork{};
+    int salaryPerHour{};
+    int workToDo{};
+    int workDone{};
 public:
     Employee();
     Employee(const std::string &name, const std::string &id, const Adress &adress, int hourWork,
@@ -39,9 +39,9 @@ public:
     friend std::istream & operator >>(std::istream & ,  Employee &);
     Employee & operator=(const Employee &);
 
-     bool validate(std::string) override;
+     bool validate(std::string);
 
-     virtual double calculateSalary() const;
+      double calculateSalary() const;
 
      double efficiency() const;
 };

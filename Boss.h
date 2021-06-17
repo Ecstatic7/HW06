@@ -25,7 +25,7 @@ public:
 
     int getNumberOfEmployees() const;
 
-    double calculateSalary() const override;
+    double calculateSalary() const ;
 };
 
 
