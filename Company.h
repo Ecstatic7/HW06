@@ -13,6 +13,8 @@ private:
 
 public:
 
+    Company() =default;
+
     Company(int budget, Boss boss,  Employee ** &);
 
     Company(const Company &);
@@ -26,9 +28,31 @@ public:
     void setEmployees( Employee ** employees);
 
 
+    int getBudget() const;
+
+    Boss *getBoss() const;
+
+    Employee **getEmployees() const;
+
     friend std::ostream & operator << (std::ostream & ,const Company &);
+    friend std::istream & operator >> (std::istream & , Company &);
+
 
     void sortEmployees();
+
+    Employee * maxEfficiency();
+
+    double averageEfficiency();
+
+    void checkBossEfficiency();
+
+    void gift();
+
+    void payForService();
+
+    bool isEnoughBudget();
+
+    void saveToFile();
 
 };
 
