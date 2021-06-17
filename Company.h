@@ -34,11 +34,13 @@ public:
 
     Employee **getEmployees() const;
 
+    void sortEmployees() const;
+
+
     friend std::ostream & operator << (std::ostream & ,const Company &);
     friend std::istream & operator >> (std::istream & , Company &);
 
 
-    void sortEmployees();
 
     Employee * maxEfficiency();
 

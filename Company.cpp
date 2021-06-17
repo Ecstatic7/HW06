@@ -7,16 +7,15 @@ Company::Company(int budget, Boss boss, Employee **&employees) : budget(budget) 
     setBoss(boss);
     setEmployees(employees);
 
-    sortEmployees();
 }
 
 Company::~Company() {
     delete boss;
 
     for (int i = 0; i < boss->getNumberOfEmployees(); ++i)
-        delete  employees[i];
+        delete employees[i];
 
-    delete [] employees;
+    delete[] employees;
 }
 
 Company::Company(const Company &company) {
@@ -33,7 +32,7 @@ void Company::setBudget(int budget) {
     Company::budget = budget;
 }
 
-void Company::setBoss(const Boss & boss) {
+void Company::setBoss(const Boss &boss) {
     this->boss = new Boss;
     *this->boss = boss;
 }
@@ -48,7 +47,8 @@ void Company::setEmployees(Employee **employees) {
     }
 }
 
-std::ostream &operator<<(std::ostream & output, const Company & company) {
+std::ostream &operator<<(std::ostream &output, const Company &company) {
+    company.sortEmployees();
     int n = company.boss->getNumberOfEmployees();
     for (int i = 0; i < n; ++i) {
         output << *company.employees[i] << std::endl;
@@ -57,7 +57,7 @@ std::ostream &operator<<(std::ostream & output, const Company & company) {
     return output;
 }
 
-std::istream &operator>>(std::istream & input, Company & company) {
+std::istream &operator>>(std::istream &input, Company &company) {
     Boss boss;
     input >> boss;
     company.setBoss(boss);
@@ -77,23 +77,23 @@ std::istream &operator>>(std::istream & input, Company & company) {
     return input;
 }
 
-void Company::sortEmployees() {
+void Company::sortEmployees() const {
     int n = this->boss->getNumberOfEmployees();
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n - 1; ++j) {
-            if (std::stoi(employees[j]->getId().substr(0,2)) == std::stoi(employees[j+1]->getId().substr(0,2)) )
-                if ((employees[j]->getName() > employees[j+1]->getName()))
-                    std::swap(*employees[j] , *employees[j+1]);
+            if (std::stoi(employees[j]->getId().substr(0, 2)) == std::stoi(employees[j + 1]->getId().substr(0, 2)))
+                if ((employees[j]->getName() > employees[j + 1]->getName()))
+                    std::swap(*employees[j], *employees[j + 1]);
 
-            if (std::stoi(employees[j]->getId().substr(0,2)) > std::stoi(employees[j+1]->getId().substr(0,2)) )
-                std::swap(*employees[j] , *employees[j+1]);
+            if (std::stoi(employees[j]->getId().substr(0, 2)) > std::stoi(employees[j + 1]->getId().substr(0, 2)))
+                std::swap(*employees[j], *employees[j + 1]);
         }
     }
 }
 
 Employee *Company::maxEfficiency() {
     double maxx = this->employees[0]->efficiency();
-    Employee * maxEmployee = this->employees[0];
+    Employee *maxEmployee = this->employees[0];
     for (int i = 0; i < this->boss->getNumberOfEmployees(); ++i)
         if (this->employees[i]->efficiency() > maxx) {
             maxx = this->employees[i]->efficiency();
@@ -112,15 +112,26 @@ double Company::averageEfficiency() {
     return average;
 }
 
-//void Company::checkBossEfficiency() {
-//    if (boss->efficiency() < 40){
-//        Employee * bestEmployee = maxEfficiency();
-//        Boss  temp = *boss;
-//        std::swap(boss , )
-//        boss = dynamic_cast<Boss *>(bestEmployee);
-//        boss->setNumberOfEmployees(n);
-//    }
-//}
+void Company::checkBossEfficiency() {
+    if (boss->efficiency() < 40) {
+        Employee *bestEmployee = maxEfficiency();
+        int n = boss->getNumberOfEmployees();
+        for (int i = 0; i < n; ++i) {
+            if (employees[i] == bestEmployee) {
+                *employees[i] = *dynamic_cast<Employee *>(boss);
+                boss = dynamic_cast<Boss *>(bestEmployee);
+                delete employees[i];
+                employees[i] = new Boss;
+                *employees[i] = *dynamic_cast<Boss *>(boss);
+                delete boss;
+                Employee * newBoss = new Boss;
+                *newBoss = *bestEmployee;
+                boss = dynamic_cast<Boss *>(newBoss);
+                boss->setNumberOfEmployees(n);
+            }
+        }
+    }
+}
 
 int Company::getBudget() const {
     return budget;
@@ -136,7 +147,7 @@ Employee **Company::getEmployees() const {
 
 void Company::gift() {
     for (int i = 0; i < boss->getNumberOfEmployees(); ++i) {
-        if (std::stoi(employees[i]->getId().substr(0,2)) < 90) {
+        if (std::stoi(employees[i]->getId().substr(0, 2)) < 90) {
             int h = employees[i]->getHourWork();
             employees[i]->setHourWork(h + 5);
         }
@@ -164,7 +175,7 @@ bool Company::isEnoughBudget() {
 }
 
 void Company::saveToFile() {
-    std::ofstream inp ("properties.txt");
+    std::ofstream inp("properties.txt");
     int numberOfEmployees = boss->getNumberOfEmployees();
     inp << numberOfEmployees;
     for (int i = 0; i < numberOfEmployees; ++i) {

@@ -28,14 +28,16 @@ int main() {
     *employees[2] = third;
     *employees[3] = second;
 
-    Boss boss("nima", "99*32133", adress, 10, 5, 10, 4, 4);
+    Boss boss("nima", "94*32133", adress, 10, 5, 10, 4, 4);
 
 
     Company company(10000 , boss , employees);
     cout << company << endl;
     cout << company.getBoss()->getName();
-    company.saveToFile();
-//    company.checkBossEfficiency();
+//    company.saveToFile();
+    company.checkBossEfficiency();
+    company.getBoss()->getName();
+    cout << company << endl;
 
 
     for (int i = 0; i < 4; ++i)
